@@ -20,20 +20,20 @@ public class IntrusionAlarmApplication {
 
         responseData = new ResponseData();
 
-        CoapServer coapServer = new CoapServer(8085);
-        coapServer.add(new LaserSensor("laser"));
-        coapServer.start();
+        CoapServer coapServerforLaserSensor = new CoapServer(8085);
+        coapServerforLaserSensor.add(new LaserSensor("laser"));
+        coapServerforLaserSensor.start();
 
-        CoapServer coapServer2 = new CoapServer(8086);
-        coapServer2.add(new VibratingSensor("vibration"));
-        coapServer2.start();
+        CoapServer coapServerforVibrationSensor = new CoapServer(8086);
+        coapServerforVibrationSensor.add(new VibratingSensor("vibration"));
+        coapServerforVibrationSensor.start();
 
-        CoapClient coapClient = new CoapClient("coap://localhost:8085/laser");
-        CoapObserveRelation relation = coapClient.observe(new CoapHandler() {
+        CoapClient laserClient = new CoapClient("coap://localhost:8085/laser");
+        CoapObserveRelation relation = laserClient.observe(new CoapHandler() {
 
             @Override
-            public void onLoad(CoapResponse coapResponse) {
-                String jsonString = coapResponse.getResponseText();
+            public void onLoad(CoapResponse coapLaserResponse) {
+                String jsonString = coapLaserResponse.getResponseText();
                 try {
                     ObjectMapper objectMapper = new ObjectMapper();
                     SensorStates sensorStates = objectMapper.readValue(jsonString, SensorStates.class );
@@ -58,9 +58,16 @@ public class IntrusionAlarmApplication {
         CoapObserveRelation vibrationRelation = vibrationClient.observe(new CoapHandler() {
 
             @Override
-            public void onLoad(CoapResponse coapResponse) {
-                responseData.setVibrationCount(coapResponse.getResponseText());
-                System.out.println("data from vibration = " + coapResponse.getResponseText());
+            public void onLoad(CoapResponse coapVibrationResponse) {
+
+                try {
+
+                }
+                catch (Exception e){
+
+                }
+                responseData.setVibrationCount(coapVibrationResponse.getResponseText());
+                System.out.println("data from vibration = " + coapVibrationResponse.getResponseText());
             }
 
             @Override

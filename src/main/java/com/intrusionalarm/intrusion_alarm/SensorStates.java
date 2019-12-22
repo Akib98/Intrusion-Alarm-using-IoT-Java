@@ -21,5 +21,15 @@ public class SensorStates {
 
     String vibrationData;
 
+    public String getHeadCountInHome() {
+        return headCountInHome;
+    }
+
+    public void setHeadCountInHome(String headCountInHome) {
+        this.headCountInHome = headCountInHome;
+    }
+
+    String headCountInHome;
+
 }
 

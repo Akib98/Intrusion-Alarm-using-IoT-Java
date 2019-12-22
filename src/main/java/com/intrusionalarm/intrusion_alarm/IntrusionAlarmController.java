@@ -25,4 +25,10 @@ public class IntrusionAlarmController {
     public ResponseData getVibrationData() {
         return IntrusionAlarmApplication.responseData;
     }
+
+    @GetMapping("get-headcount-data")
+    @ResponseBody
+    public ResponseData getHeadCountData() {
+        return IntrusionAlarmApplication.responseData;
+    }
 }

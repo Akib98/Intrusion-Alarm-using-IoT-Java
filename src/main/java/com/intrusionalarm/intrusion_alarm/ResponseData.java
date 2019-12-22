@@ -19,5 +19,16 @@ public class ResponseData {
         this.vibrationCount = vibrationCount;
     }
 
-    public String vibrationCount;
+    private String vibrationCount;
+
+    public String getHeadCountInHome() {
+        return headCountInHome;
+    }
+
+    public void setHeadCountInHome(String headCountInHome) {
+        this.headCountInHome = headCountInHome;
+    }
+
+    private  String headCountInHome;
+
 }

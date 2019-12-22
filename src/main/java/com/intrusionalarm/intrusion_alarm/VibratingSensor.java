@@ -18,21 +18,23 @@ public class VibratingSensor extends ConcurrentCoapResource {
         setObserveType(CoAP.Type.CON);
         getAttributes().setObservable();
         Timer timer = new Timer();
-        timer.schedule(new VibratingSensor.ContinuousTask(), 0, 2000);
+        timer.schedule(new VibratingSensor.ContinuousTask(), 0, 1000);
     }
 
     private class ContinuousTask extends TimerTask {
         @Override
         public void run() {
+            Random rand = new Random();
+            VibrationCounter = rand.nextInt(50);
+            VibrationCounter += 1;
 
-            VibrationCounter = (int) Math.random() * 49 + 1;
             changed();
         }
     }
 
     @Override
     public void handleGET(CoapExchange exchange) {
-        exchange.respond("data from coap " + VibrationCounter);
+        exchange.respond("data from vibration " + VibrationCounter);
 
     }
 }
