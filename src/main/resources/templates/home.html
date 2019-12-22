@@ -1,0 +1,65 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title> Smart Home </title>
+
+    <link rel="stylesheet" th:href="@{/css/main.css}"/>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.css}"/>
+    <script type="text/javascript" th:src="@{/js/jquery-3.4.1.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/bootstrap.js}"></script>
+
+
+</head>
+
+<body>
+
+<h1>Smart home</h1>
+<label>Head Count Inside: </label> <h1 id="headCount"></h1>
+
+<script type="application/javascript">
+    function getContiniouslyHeadCountData() {
+        $.ajax({
+            url: '/SmartHomeSystem/get-data',
+            type: "GET",
+            dataType: "xml",
+            contentType: "application/xml",
+            success: function (xmlData) {
+                $(xmlData).find("ResponseData").each(function () {
+                    var headCount = $(this).find('headCount').text();
+                    $('#headCount').html(headCount);
+                });
+            }
+        });
+    }
+
+    setInterval(getContiniouslyHeadCountData, 3000);
+
+</script>
+
+<label>Vibration Count in the door: </label> <h1 id="vibrationCount"></h1>
+
+<script type="application/javascript">
+    function getContiniouslyAllData() {
+        $.ajax({
+            url: '/SmartHomeSystem/get-vibration-data',
+            type: "GET",
+            dataType: "xml",
+            contentType: "application/xml",
+            success: function (xmlData) {
+                $(xmlData).find("ResponseData").each(function () {
+                    var vibrationCount = $(this).find('vibrationCount').text();
+                    $('#vibrationCount').html(vibrationCount);
+                });
+            }
+        });
+    }
+
+    setInterval(getContiniouslyAllData, 3000);
+
+</script>
+
+</body>
+</html>
