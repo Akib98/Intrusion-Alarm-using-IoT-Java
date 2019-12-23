@@ -41,6 +41,8 @@
 
 <label>Vibration Count in the door: </label> <h1 id="vibrationCount"></h1>
 
+
+
 <script type="application/javascript">
     function getContiniouslyAllData() {
         $.ajax({
@@ -58,6 +60,28 @@
     }
 
     setInterval(getContiniouslyAllData, 3000);
+
+</script>
+
+<label>Head Count Inside new sensor: </label> <h1 id="headCountInHome"></h1>
+
+<script type="application/javascript">
+    function getContiniouslyHeadCountInHomeData() {
+        $.ajax({
+            url: '/SmartHomeSystem/get-headcount-data',
+            type: "GET",
+            dataType: "xml",
+            contentType: "application/xml",
+            success: function (xmlData) {
+                $(xmlData).find("ResponseData").each(function () {
+                    var headCountInHome = $(this).find('headCountInHome').text();
+                    $('#headCountInHome').html(headCountInHome);
+                });
+            }
+        });
+    }
+
+    setInterval(getContiniouslyHeadCountInHomeData, 4000);
 
 </script>
 

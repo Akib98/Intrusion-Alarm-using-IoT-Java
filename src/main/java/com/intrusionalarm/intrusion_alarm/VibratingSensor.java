@@ -1,5 +1,6 @@
 package com.intrusionalarm.intrusion_alarm;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.eclipse.californium.core.coap.CoAP;
 import org.eclipse.californium.core.server.resources.CoapExchange;
 import org.eclipse.californium.core.server.resources.ConcurrentCoapResource;
@@ -9,10 +10,12 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class VibratingSensor extends ConcurrentCoapResource {
+    public static SensorStates sensorStates;
     public static int VibrationCounter = 0;
 
     public VibratingSensor(String name) {
         super(name);
+        sensorStates = new SensorStates();
 
         setObservable(true);
         setObserveType(CoAP.Type.CON);
@@ -27,14 +30,23 @@ public class VibratingSensor extends ConcurrentCoapResource {
             Random rand = new Random();
             VibrationCounter = rand.nextInt(50);
             VibrationCounter += 1;
-
+            String data = VibrationCounter + "";
+            sensorStates.setVibrationData(data);
             changed();
         }
     }
 
     @Override
     public void handleGET(CoapExchange exchange) {
-        exchange.respond("data from vibration " + VibrationCounter);
+        try {
+            ObjectMapper objectMapper = new ObjectMapper();
+            String jsonString = objectMapper.writeValueAsString(sensorStates);
+            exchange.respond(jsonString);
+        }
+        catch (Exception e)
+        {
+
+        }
 
     }
 }

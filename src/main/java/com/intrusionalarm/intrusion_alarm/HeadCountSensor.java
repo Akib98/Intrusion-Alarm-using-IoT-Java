@@ -5,6 +5,7 @@ import org.eclipse.californium.core.coap.CoAP;
 import org.eclipse.californium.core.server.resources.CoapExchange;
 import org.eclipse.californium.core.server.resources.ConcurrentCoapResource;
 
+import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -28,8 +29,11 @@ public class HeadCountSensor extends ConcurrentCoapResource {
         @Override
         public void run() {
 
-            HeadCountInHome = (int) Math.random() * 49 + 1;
-            HeadCountInHome++;
+            Random rand = new Random();
+            HeadCountInHome = rand.nextInt(50);
+            HeadCountInHome += 1;
+            String data = HeadCountInHome + "";
+            sensorStates.setHeadCountInHome(data);
             changed();
         }
     }
