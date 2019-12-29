@@ -11,7 +11,7 @@ import java.util.TimerTask;
 public class LaserSensor extends ConcurrentCoapResource {
     public static SensorStates sensorStates;
 
-    public static int Counter = 0;
+    public static boolean Sesnor1Data;
 
 
     public LaserSensor(String name) {
@@ -28,9 +28,15 @@ public class LaserSensor extends ConcurrentCoapResource {
     private class ContinuousTask extends TimerTask {
         @Override
         public void run() {
-            Counter++;
-            String data = Counter + "";
-            sensorStates.setHeadCount(data);
+            if(Sesnor1Data== true)
+            { Sesnor1Data = false;}
+
+            else if(Sesnor1Data == false)
+            {Sesnor1Data = true;}
+            //Counter++;
+            //String data = Counter + "";
+            //sensorStates.setHeadCount(data);
+            sensorStates.setLaserSensor1data(Sesnor1Data);
             changed();
         }
     }

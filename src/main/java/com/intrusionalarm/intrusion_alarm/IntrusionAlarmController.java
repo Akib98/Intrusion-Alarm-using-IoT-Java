@@ -26,9 +26,21 @@ public class IntrusionAlarmController {
         return IntrusionAlarmApplication.responseData;
     }
 
-    @GetMapping("get-headcount-data")
+    @GetMapping("get-laser1-data")
     @ResponseBody
-    public ResponseData getHeadCountData() {
+    public ResponseData LaserSensor1data() {
+        return IntrusionAlarmApplication.responseData;
+    }
+
+    @GetMapping("get-laser2-data")
+    @ResponseBody
+    public ResponseData LaserSensor2data() {
+        return IntrusionAlarmApplication.responseData;
+    }
+
+    @GetMapping("get-laser3-data")
+    @ResponseBody
+    public ResponseData LaserSensor3data() {
         return IntrusionAlarmApplication.responseData;
     }
 }

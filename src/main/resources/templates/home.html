@@ -10,11 +10,19 @@
     <link rel="stylesheet" th:href="@{/css/bootstrap.css}"/>
     <script type="text/javascript" th:src="@{/js/jquery-3.4.1.min.js}"></script>
     <script type="text/javascript" th:src="@{/js/bootstrap.js}"></script>
+    <link rel="stylesheet" th:href="@{/css/Custom.css}"/>
 
 
 </head>
 
-<body>
+<body class="bg-image">
+
+<div class="container">
+    <style>
+
+    </style>
+
+</div>
 
 <h1>Smart home</h1>
 <label>Head Count Inside: </label> <h1 id="headCount"></h1>
@@ -34,8 +42,7 @@
             }
         });
     }
-
-    setInterval(getContiniouslyHeadCountData, 3000);
+    setInterval(getContiniouslyHeadCountData, 5000);
 
 </script>
 
@@ -54,36 +61,108 @@
                 $(xmlData).find("ResponseData").each(function () {
                     var vibrationCount = $(this).find('vibrationCount').text();
                     $('#vibrationCount').html(vibrationCount);
+
                 });
             }
         });
     }
-
-    setInterval(getContiniouslyAllData, 3000);
+    setInterval(getContiniouslyAllData, 5000);
 
 </script>
 
-<label>Head Count Inside new sensor: </label> <h1 id="headCountInHome"></h1>
+<label>Laser 1 data: </label> <h1 id="laser1"></h1>
 
 <script type="application/javascript">
-    function getContiniouslyHeadCountInHomeData() {
+    function getContiniouslyLaser1Data() {
         $.ajax({
-            url: '/SmartHomeSystem/get-headcount-data',
+            url: '/SmartHomeSystem/get-laser1-data',
             type: "GET",
             dataType: "xml",
             contentType: "application/xml",
             success: function (xmlData) {
                 $(xmlData).find("ResponseData").each(function () {
-                    var headCountInHome = $(this).find('headCountInHome').text();
-                    $('#headCountInHome').html(headCountInHome);
+                    var laser1 = $(this).find('laserSensor1data').text();
+                    $('#laser1').html(laser1);
+                    //TakeDecision(headCountInHome,headCountInHome);
                 });
             }
         });
     }
 
-    setInterval(getContiniouslyHeadCountInHomeData, 4000);
+    setInterval(getContiniouslyLaser1Data, 5000);
 
 </script>
 
+<label>laser 2 data: </label> <h1 id="laser2"></h1>
+
+<script type="application/javascript">
+    function getContiniouslyHeadCountData() {
+        $.ajax({
+            url: '/SmartHomeSystem/get-laser2-data',
+            type: "GET",
+            dataType: "xml",
+            contentType: "application/xml",
+            success: function (xmlData) {
+                result=xmlData;
+                $(xmlData).find("ResponseData").each(function () {
+
+                    var laser2 = $(this).find('laserSensor2data').text();
+                    var headCountInHome = $(this).find('headCountInHome').text();
+                    var vibrationCount = $(this).find('vibrationCount').text();
+                    var headCount = $(this).find('headCount').text();
+                    console.log(xmlData);
+                    $('#laser2').html(laser2);
+                    TakeDecision(laser2,headCountInHome, vibrationCount, headCount);
+                });
+            }
+        });
+    }
+
+
+
+    setInterval(getContiniouslyHeadCountData, 5000);
+
+</script>
+
+<label>laser 3 data: </label> <h1 id="laser3"></h1>
+<label>Final decision: </label> <h1 id="decision"></h1>
+
+<script type="application/javascript">
+    function getContiniouslyHeadCountData() {
+        $.ajax({
+            url: '/SmartHomeSystem/get-laser3-data',
+            type: "GET",
+            dataType: "xml",
+            contentType: "application/xml",
+            success: function (xmlData) {
+                result=xmlData;
+                $(xmlData).find("ResponseData").each(function () {
+
+                    var laser3 = $(this).find('laserSensor3data').text();
+                    console.log(xmlData);
+                    $('#laser3').html(laser3);
+                });
+            }
+        });
+    }
+
+
+
+    setInterval(getContiniouslyHeadCountData, 5000);
+
+</script>
+
+<script>
+        function TakeDecision(data1,data2, data3,data4){
+       if(data1==true)
+       {
+           $('#decision').html(data1.concat(data2, data3, data4));
+       }
+       else
+       {
+           $('#decision').html(data1.concat(data2, data3, data4));
+       }
+    }
+</script>>
 </body>
 </html>
