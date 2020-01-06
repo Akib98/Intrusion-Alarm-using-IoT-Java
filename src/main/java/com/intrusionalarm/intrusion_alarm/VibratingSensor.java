@@ -21,7 +21,7 @@ public class VibratingSensor extends ConcurrentCoapResource {
         setObserveType(CoAP.Type.CON);
         getAttributes().setObservable();
         Timer timer = new Timer();
-        timer.schedule(new VibratingSensor.ContinuousTask(), 0, 1000);
+        timer.schedule(new VibratingSensor.ContinuousTask(), 0, 3000);
     }
 
     private class ContinuousTask extends TimerTask {

@@ -17,15 +17,19 @@
 
 <body class="bg-image">
 
-<div class="container">
-    <style>
-
-    </style>
-
-</div>
 
 <h1>Smart home</h1>
 <label>Head Count Inside: </label> <h1 id="headCount"></h1>
+
+<label>Vibration Count in the door: </label> <h1 id="vibrationCount"></h1>
+
+<label>Laser 1 data: </label> <h1 id="laser1"></h1>
+
+<label>laser 2 data: </label> <h1 id="laser2"></h1>
+
+<label>laser 3 data: </label> <h1 id="laser3"></h1>
+
+<label>Final decision: </label> <h1 id="decision"></h1>
 
 <script type="application/javascript">
     function getContiniouslyHeadCountData() {
@@ -45,10 +49,6 @@
     setInterval(getContiniouslyHeadCountData, 5000);
 
 </script>
-
-<label>Vibration Count in the door: </label> <h1 id="vibrationCount"></h1>
-
-
 
 <script type="application/javascript">
     function getContiniouslyAllData() {
@@ -70,8 +70,6 @@
 
 </script>
 
-<label>Laser 1 data: </label> <h1 id="laser1"></h1>
-
 <script type="application/javascript">
     function getContiniouslyLaser1Data() {
         $.ajax({
@@ -92,8 +90,6 @@
     setInterval(getContiniouslyLaser1Data, 5000);
 
 </script>
-
-<label>laser 2 data: </label> <h1 id="laser2"></h1>
 
 <script type="application/javascript">
     function getContiniouslyHeadCountData() {
@@ -123,9 +119,6 @@
     setInterval(getContiniouslyHeadCountData, 5000);
 
 </script>
-
-<label>laser 3 data: </label> <h1 id="laser3"></h1>
-<label>Final decision: </label> <h1 id="decision"></h1>
 
 <script type="application/javascript">
     function getContiniouslyHeadCountData() {
@@ -163,6 +156,6 @@
            $('#decision').html(data1.concat(data2, data3, data4));
        }
     }
-</script>>
+</script>
 </body>
 </html>

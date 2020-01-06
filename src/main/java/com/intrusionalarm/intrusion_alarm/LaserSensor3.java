@@ -28,18 +28,12 @@ public class LaserSensor3 extends ConcurrentCoapResource {
     private class ContinuousTask extends TimerTask {
         @Override
         public void run() {
-            //if(Counter)
-                //Counter = false;
-            //else
-                if(Sesnor3Data== true)
-                { Sesnor3Data = false;}
-
-                else if(Sesnor3Data == false)
-                {Sesnor3Data = true;}
-            //String data = Counter + "";
+            if (Sesnor3Data == true) {
+                Sesnor3Data = false;
+            } else if (Sesnor3Data == false) {
+                Sesnor3Data = true;
+            }
             sensorStates.setLaserSensor3data(Sesnor3Data);
-            //System.out.println("Sesnor from laser3 = " + sensorStates.isLaserSensor3data());
-            //System.out.println("sesnor from laser2 = " + Sesnor2Data);
             changed();
         }
     }

@@ -33,9 +33,6 @@ public class LaserSensor extends ConcurrentCoapResource {
 
             else if(Sesnor1Data == false)
             {Sesnor1Data = true;}
-            //Counter++;
-            //String data = Counter + "";
-            //sensorStates.setHeadCount(data);
             sensorStates.setLaserSensor1data(Sesnor1Data);
             changed();
         }
