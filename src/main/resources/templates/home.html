@@ -16,20 +16,32 @@
 </head>
 
 <body class="bg-image">
+<div class="main-grid-container">
+
+
+
+    <div class="grid-container-1">
+        <div class="grid-item"><h1 id="sensor1">People</h1></div>
+        <div class="grid-item"><h1 id="headCountInHome"></h1></div>
+        <div class="grid-item"><h1 id="sensor2">Window 1</h1></div>
+        <div class="grid-item"><h1 id="laser1"></h1></div>
+        <div class="grid-item"><h1 id="sensor3">Window 2</h1></div>
+        <div class="grid-item"><h1 id="laser2"></h1></div>
+        <div class="grid-item"><h1 id="sensor4">Window 3</h1></div>
+        <div class="grid-item"><h1 id="laser3"></h1></div>
+        <div class="grid-item"><h1 id="sensor5">Door Look</h1></div>
+        <div class="grid-item"><h1 id="vibrationCount"></h1></div>
+    </div>
+
+    <div class="grid-container">
+        <div class="grid-item-1">11</div>
+        <div class="grid-item-1">12</div>
+    </div>
+
+</div>
 
 
 <h1>Smart home</h1>
-<label>Head Count Inside: </label> <h1 id="headCount"></h1>
-
-<label>Vibration Count in the door: </label> <h1 id="vibrationCount"></h1>
-
-<label>Laser 1 data: </label> <h1 id="laser1"></h1>
-
-<label>laser 2 data: </label> <h1 id="laser2"></h1>
-
-<label>laser 3 data: </label> <h1 id="laser3"></h1>
-
-<label>Final decision: </label> <h1 id="decision"></h1>
 
 <script type="application/javascript">
     function getContiniouslyHeadCountData() {
@@ -108,6 +120,7 @@
                     var headCount = $(this).find('headCount').text();
                     console.log(xmlData);
                     $('#laser2').html(laser2);
+                    $('#headCountInHome').html(headCountInHome);
                     TakeDecision(laser2,headCountInHome, vibrationCount, headCount);
                 });
             }

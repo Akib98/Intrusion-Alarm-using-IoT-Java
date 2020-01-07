@@ -1,6 +1,7 @@
 .bg-image {
+    overflow-x: hidden;
     /* The image used */
-    background-image: url("1.jpg");
+    background-image: url("2.jfif");
 
     /* Add the blur effect */
     filter: blur(0px);
@@ -13,4 +14,53 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-rows: auto auto;
+    background-color: transparent;
+    padding: 10px;
+    border-radius: 30px;
+    position: relative;
+    top:0;
+}
+
+.grid-container-1 {
+    display: grid;
+    grid-template-columns: auto auto;
+    background-color: transparent;
+    padding: 50px;
+    border-radius: 30px;
+}
+
+.grid-item {
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(0, 0, 0, 0.8);
+    padding: 40px;
+    font-size: 20px;
+    text-align: center;
+    border-radius: 25px;
+    margin: 25px;
+    opacity: 50%;
+}
+.grid-item-1 {
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(0, 0, 0, 0.8);
+    padding: 50px;
+    font-size: 20px;
+    text-align: center;
+    border-radius: 25px;
+    margin: 50px;
+}
+
+.main-grid-container {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    background-color: transparent;
+    padding: 10px;
+}
+.static-column {
+    float: left;
+    width: 50%;
 }
