@@ -14,33 +14,9 @@ public class IntrusionAlarmController {
         return "home";
     }
 
-    @GetMapping("get-data")
+    @GetMapping("get-all-data")
     @ResponseBody
     public ResponseData getData() {
-        return IntrusionAlarmApplication.responseData;
-    }
-
-    @GetMapping("get-vibration-data")
-    @ResponseBody
-    public ResponseData getVibrationData() {
-        return IntrusionAlarmApplication.responseData;
-    }
-
-    @GetMapping("get-laser1-data")
-    @ResponseBody
-    public ResponseData LaserSensor1data() {
-        return IntrusionAlarmApplication.responseData;
-    }
-
-    @GetMapping("get-laser2-data")
-    @ResponseBody
-    public ResponseData LaserSensor2data() {
-        return IntrusionAlarmApplication.responseData;
-    }
-
-    @GetMapping("get-laser3-data")
-    @ResponseBody
-    public ResponseData LaserSensor3data() {
         return IntrusionAlarmApplication.responseData;
     }
 }

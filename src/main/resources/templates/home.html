@@ -34,8 +34,8 @@
     </div>
 
     <div class="grid-container">
-        <div class="grid-item-1">11</div>
-        <div class="grid-item-1">12</div>
+        <div class="grid-item-1"><h1 id="decisionBlock">Decision</h1></div>
+        <div class="grid-item-1"><h1 id="decision"></h1></div>
     </div>
 
 </div>
@@ -44,36 +44,29 @@
 <h1>Smart home</h1>
 
 <script type="application/javascript">
-    function getContiniouslyHeadCountData() {
-        $.ajax({
-            url: '/SmartHomeSystem/get-data',
-            type: "GET",
-            dataType: "xml",
-            contentType: "application/xml",
-            success: function (xmlData) {
-                $(xmlData).find("ResponseData").each(function () {
-                    var headCount = $(this).find('headCount').text();
-                    $('#headCount').html(headCount);
-                });
-            }
-        });
-    }
-    setInterval(getContiniouslyHeadCountData, 5000);
-
-</script>
-
-<script type="application/javascript">
     function getContiniouslyAllData() {
         $.ajax({
-            url: '/SmartHomeSystem/get-vibration-data',
+            url: '/SmartHomeSystem/get-all-data',
             type: "GET",
             dataType: "xml",
             contentType: "application/xml",
             success: function (xmlData) {
+                result=xmlData;
                 $(xmlData).find("ResponseData").each(function () {
+                    var headCountInHome = $(this).find('headCountInHome').text();
+                    var laser1 = $(this).find('laserSensor1data').text();
+                    var laser2 = $(this).find('laserSensor2data').text();
+                    var laser3 = $(this).find('laserSensor3data').text();
                     var vibrationCount = $(this).find('vibrationCount').text();
+                    //console.log(xmlData);
+
+                    $('#headCountInHome').html(headCountInHome);
+                    $('#laser1').html(laser1);
+                    $('#laser2').html(laser2);
+                    $('#laser3').html(laser3);
                     $('#vibrationCount').html(vibrationCount);
 
+                    TakeDecision(headCountInHome, laser1, laser2, laser3, vibrationCount);
                 });
             }
         });
@@ -82,92 +75,17 @@
 
 </script>
 
-<script type="application/javascript">
-    function getContiniouslyLaser1Data() {
-        $.ajax({
-            url: '/SmartHomeSystem/get-laser1-data',
-            type: "GET",
-            dataType: "xml",
-            contentType: "application/xml",
-            success: function (xmlData) {
-                $(xmlData).find("ResponseData").each(function () {
-                    var laser1 = $(this).find('laserSensor1data').text();
-                    $('#laser1').html(laser1);
-                    //TakeDecision(headCountInHome,headCountInHome);
-                });
-            }
-        });
-    }
-
-    setInterval(getContiniouslyLaser1Data, 5000);
-
-</script>
-
-<script type="application/javascript">
-    function getContiniouslyHeadCountData() {
-        $.ajax({
-            url: '/SmartHomeSystem/get-laser2-data',
-            type: "GET",
-            dataType: "xml",
-            contentType: "application/xml",
-            success: function (xmlData) {
-                result=xmlData;
-                $(xmlData).find("ResponseData").each(function () {
-
-                    var laser2 = $(this).find('laserSensor2data').text();
-                    var headCountInHome = $(this).find('headCountInHome').text();
-                    var vibrationCount = $(this).find('vibrationCount').text();
-                    var headCount = $(this).find('headCount').text();
-                    console.log(xmlData);
-                    $('#laser2').html(laser2);
-                    $('#headCountInHome').html(headCountInHome);
-                    TakeDecision(laser2,headCountInHome, vibrationCount, headCount);
-                });
-            }
-        });
-    }
-
-
-
-    setInterval(getContiniouslyHeadCountData, 5000);
-
-</script>
-
-<script type="application/javascript">
-    function getContiniouslyHeadCountData() {
-        $.ajax({
-            url: '/SmartHomeSystem/get-laser3-data',
-            type: "GET",
-            dataType: "xml",
-            contentType: "application/xml",
-            success: function (xmlData) {
-                result=xmlData;
-                $(xmlData).find("ResponseData").each(function () {
-
-                    var laser3 = $(this).find('laserSensor3data').text();
-                    console.log(xmlData);
-                    $('#laser3').html(laser3);
-                });
-            }
-        });
-    }
-
-
-
-    setInterval(getContiniouslyHeadCountData, 5000);
-
-</script>
 
 <script>
-        function TakeDecision(data1,data2, data3,data4){
-       if(data1==true)
-       {
-           $('#decision').html(data1.concat(data2, data3, data4));
-       }
-       else
-       {
-           $('#decision').html(data1.concat(data2, data3, data4));
-       }
+        function TakeDecision(headCountInHome, laser1, laser2, laser3, vibrationCount){
+            var displayed;
+            if (laser1 === true) {
+                displayed = headCountInHome.concat(laser1, laser2, laser3, vibrationCount);
+
+            } else {
+                displayed = laser1.concat(headCountInHome);
+            }
+            $('#decision').html(displayed);
     }
 </script>
 </body>
