@@ -52,6 +52,7 @@
             contentType: "application/xml",
             success: function (xmlData) {
                 result=xmlData;
+                console.log(xmlData);
                 $(xmlData).find("ResponseData").each(function () {
                     var headCountInHome = $(this).find('headCountInHome').text();
                     var laser1 = $(this).find('laserSensor1data').text();
@@ -71,20 +72,27 @@
             }
         });
     }
-    setInterval(getContiniouslyAllData, 5000);
+    setInterval(getContiniouslyAllData, 2000);
 
 </script>
 
 <script>
-        function TakeDecision(headCountInHome, laser1, laser2, laser3, vibrationCount){
-            var displayed;
-            if (laser1 === true) {
+    function TakeDecision(headCountInHome, laser1, laser2, laser3, vibrationCount) {
+        let displayed;
+        if(headCountInHome === 0 || headCountInHome === '0')
+        {
+            if (laser1 === true || laser1 === 'true') {
                 displayed = headCountInHome.concat(laser1, laser2, laser3, vibrationCount);
-
             } else {
                 displayed = laser1.concat(headCountInHome);
             }
-            $('#decision').html(displayed);
+        }
+        else
+        {
+            displayed = 'dafdsafasf';
+        }
+
+        $('#decision').html(displayed);
     }
 </script>
 </body>

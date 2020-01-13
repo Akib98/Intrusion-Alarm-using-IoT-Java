@@ -22,7 +22,7 @@ public class HeadCountSensor extends ConcurrentCoapResource {
         setObserveType(CoAP.Type.CON);
         getAttributes().setObservable();
         Timer timer = new Timer();
-        timer.schedule(new HeadCountSensor.ContinuousTask(), 0, 5000);
+        timer.schedule(new HeadCountSensor.ContinuousTask(), 0, 30000);
     }
 
     private class ContinuousTask extends TimerTask {
@@ -30,7 +30,7 @@ public class HeadCountSensor extends ConcurrentCoapResource {
         public void run() {
 
 
-            HeadCountInHome = ThreadLocalRandom.current().nextInt(0, 5 + 1);
+            HeadCountInHome = ThreadLocalRandom.current().nextInt(0, 1 + 1);
             String data = HeadCountInHome + "";
             sensorStates.setHeadCountInHome(data);
             changed();
