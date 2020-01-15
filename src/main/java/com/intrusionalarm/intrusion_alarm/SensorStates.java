@@ -1,17 +1,6 @@
 package com.intrusionalarm.intrusion_alarm;
 
 public class SensorStates {
-
-    public String getVibrationData() {
-        return vibrationData;
-    }
-
-    public void setVibrationData(String vibrationData) {
-        this.vibrationData = vibrationData;
-    }
-
-    String vibrationData;
-
     public String getHeadCountInHome() {
         return headCountInHome;
     }
@@ -51,6 +40,16 @@ public class SensorStates {
     }
 
     boolean LaserSensor3data;
+
+    public String getVibrationData() {
+        return vibrationData;
+    }
+
+    public void setVibrationData(String vibrationData) {
+        this.vibrationData = vibrationData;
+    }
+
+    String vibrationData;
 
 }
 

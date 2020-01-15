@@ -7,12 +7,26 @@ import org.eclipse.californium.core.server.resources.ConcurrentCoapResource;
 
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class LaserSensor extends ConcurrentCoapResource {
     public static SensorStates sensorStates;
-
     public static boolean Sesnor1Data;
 
+    private class ContinuousTask extends TimerTask {
+        @Override
+        public void run() {
+            int randomValue = ThreadLocalRandom.current().nextInt(0, 50 + 1);
+            if(randomValue % 5 == 0)
+            { Sesnor1Data = false;}
+            else
+            {
+                Sesnor1Data = true;
+            }
+            sensorStates.setLaserSensor1data(Sesnor1Data);
+            changed();
+        }
+    }
 
     public LaserSensor(String name) {
         super(name);
@@ -22,22 +36,8 @@ public class LaserSensor extends ConcurrentCoapResource {
         setObserveType(CoAP.Type.CON);
         getAttributes().setObservable();
         Timer timer = new Timer();
-        timer.schedule(new ContinuousTask(), 0, 2000);
+        timer.schedule(new ContinuousTask(), 0, 5000);
     }
-
-    private class ContinuousTask extends TimerTask {
-        @Override
-        public void run() {
-            if(Sesnor1Data== true)
-            { Sesnor1Data = false;}
-
-            else if(Sesnor1Data == false)
-            {Sesnor1Data = true;}
-            sensorStates.setLaserSensor1data(Sesnor1Data);
-            changed();
-        }
-    }
-
     @Override
     public void handleGET(CoapExchange exchange) {
         try {
@@ -47,9 +47,6 @@ public class LaserSensor extends ConcurrentCoapResource {
         }
         catch (Exception e)
         {
-
         }
-
-
     }
 }

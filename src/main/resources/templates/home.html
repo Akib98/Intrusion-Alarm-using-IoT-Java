@@ -81,15 +81,20 @@
         let displayed;
         if(headCountInHome === 0 || headCountInHome === '0')
         {
-            if (laser1 === true || laser1 === 'true') {
-                displayed = headCountInHome.concat(laser1, laser2, laser3, vibrationCount);
-            } else {
-                displayed = laser1.concat(headCountInHome);
+            if (laser1 === false || laser1 === 'false' || laser2 === false || laser2 === 'false' || laser3 === false || laser3 === 'false') {
+                displayed = 'Alarm! No one at home, someone broke the window and went through!';
+            } else if (vibrationCount > 35) {
+                displayed = 'Alarm!! No one at home, someone is trying to break the door lock!';
             }
         }
         else
         {
-            displayed = 'dafdsafasf';
+            if (vibrationCount > 35) {
+                displayed = 'Alarm! People is in home! Someone is trying to break the door lock!';
+            }
+            else {
+                displayed = 'Safe';
+            }
         }
 
         $('#decision').html(displayed);

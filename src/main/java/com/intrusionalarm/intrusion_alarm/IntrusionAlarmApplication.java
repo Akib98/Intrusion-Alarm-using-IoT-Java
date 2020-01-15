@@ -81,6 +81,7 @@ public class IntrusionAlarmApplication {
             @Override
             public void onLoad(CoapResponse coapHeadCountResponse) {
                 String jsonString = coapHeadCountResponse.getResponseText();
+                System.out.println("Response from the HeadCount sensor: " + jsonString);
                 try {
                     ObjectMapper objectMapper = new ObjectMapper();
                     SensorStates sensorStates = objectMapper.readValue(jsonString, SensorStates.class);

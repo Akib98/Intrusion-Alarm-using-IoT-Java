@@ -1,5 +1,6 @@
 .bg-image {
     overflow-x: hidden;
+    overflow-y:hidden;
     /* The image used */
     background-image: url("2.jfif");
 
