@@ -19,63 +19,11 @@ public class IntrusionAlarmApplication {
 
         responseData = new ResponseData();
 
-        CoapServer coapServerforLaserSensor1 = new CoapServer(8089);
-        coapServerforLaserSensor1.add(new LaserSensor("laser1"));
-        coapServerforLaserSensor1.start();
-
-        CoapClient laserClient1 = new CoapClient("coap://localhost:8089/laser1");
-        CoapObserveRelation relation1 = laserClient1.observe(new CoapHandler() {
-
-            @Override
-            public void onLoad(CoapResponse coapLaser1Response) {
-                String jsonString = coapLaser1Response.getResponseText();
-                try {
-                    ObjectMapper objectMapper = new ObjectMapper();
-                    SensorStates sensorStates = objectMapper.readValue(jsonString, SensorStates.class);
-
-                    responseData.setLaserSensor1data(sensorStates.isLaserSensor1data());
-                } catch (Exception e) {
-                }
-            }
-
-            @Override
-            public void onError() {
-            }
-        });
-
-        CoapServer coapServerforVibrationSensor = new CoapServer(8087);
-        coapServerforVibrationSensor.add(new VibratingSensor("vibration"));
-        coapServerforVibrationSensor.start();
-
-        CoapClient vibrationClient = new CoapClient("coap://localhost:8087/vibration");
-        CoapObserveRelation vibrationRelation = vibrationClient.observe(new CoapHandler() {
-
-            @Override
-            public void onLoad(CoapResponse coapVibrationResponse) {
-                String jsonString = coapVibrationResponse.getResponseText();
-
-                try {
-                    ObjectMapper objectMapper = new ObjectMapper();
-                    SensorStates sensorStates = objectMapper.readValue(jsonString, SensorStates.class);
-
-                    responseData.setVibrationCount(sensorStates.getVibrationData());
-                } catch (Exception e) {
-
-                }
-
-            }
-
-            @Override
-            public void onError() {
-
-            }
-        });
-
-        CoapServer coapServerforHeadCountSensor = new CoapServer(8085);
+        CoapServer coapServerforHeadCountSensor = new CoapServer(5685);
         coapServerforHeadCountSensor.add(new HeadCountSensor("headCount"));
         coapServerforHeadCountSensor.start();
 
-        CoapClient headCountClient = new CoapClient("coap://localhost:8085/headCount");
+        CoapClient headCountClient = new CoapClient("coap://localhost:5685/headCount");
         CoapObserveRelation headCountRelation = headCountClient.observe(new CoapHandler() {
 
             @Override
@@ -98,11 +46,35 @@ public class IntrusionAlarmApplication {
             }
         });
 
-        CoapServer coapServerforLaserSensor2 = new CoapServer(8083);
+        CoapServer coapServerforLaserSensor1 = new CoapServer(5689);
+        coapServerforLaserSensor1.add(new LaserSensor("laser1"));
+        coapServerforLaserSensor1.start();
+
+        CoapClient laserClient1 = new CoapClient("coap://localhost:5689/laser1");
+        CoapObserveRelation relation1 = laserClient1.observe(new CoapHandler() {
+
+            @Override
+            public void onLoad(CoapResponse coapLaser1Response) {
+                String jsonString = coapLaser1Response.getResponseText();
+                try {
+                    ObjectMapper objectMapper = new ObjectMapper();
+                    SensorStates sensorStates = objectMapper.readValue(jsonString, SensorStates.class);
+
+                    responseData.setLaserSensor1data(sensorStates.isLaserSensor1data());
+                } catch (Exception e) {
+                }
+            }
+
+            @Override
+            public void onError() {
+            }
+        });
+
+        CoapServer coapServerforLaserSensor2 = new CoapServer(5683);
         coapServerforLaserSensor2.add(new LaserSensor2("laser2"));
         coapServerforLaserSensor2.start();
 
-        CoapClient laserClient2 = new CoapClient("coap://localhost:8083/laser2");
+        CoapClient laserClient2 = new CoapClient("coap://localhost:5683/laser2");
         CoapObserveRelation relation2 = laserClient2.observe(new CoapHandler() {
 
             @Override
@@ -122,11 +94,11 @@ public class IntrusionAlarmApplication {
             }
         });
 
-        CoapServer coapServerforLaserSensor3 = new CoapServer(8084);
+        CoapServer coapServerforLaserSensor3 = new CoapServer(5684);
         coapServerforLaserSensor3.add(new LaserSensor3("laser3"));
         coapServerforLaserSensor3.start();
 
-        CoapClient laserClient3 = new CoapClient("coap://localhost:8084/laser3");
+        CoapClient laserClient3 = new CoapClient("coap://localhost:5684/laser3");
         CoapObserveRelation relation3 = laserClient3.observe(new CoapHandler() {
 
             @Override
@@ -143,6 +115,34 @@ public class IntrusionAlarmApplication {
 
             @Override
             public void onError() {
+            }
+        });
+
+        CoapServer coapServerforVibrationSensor = new CoapServer(5687);
+        coapServerforVibrationSensor.add(new VibratingSensor("vibration"));
+        coapServerforVibrationSensor.start();
+
+        CoapClient vibrationClient = new CoapClient("coap://localhost:5687/vibration");
+        CoapObserveRelation vibrationRelation = vibrationClient.observe(new CoapHandler() {
+
+            @Override
+            public void onLoad(CoapResponse coapVibrationResponse) {
+                String jsonString = coapVibrationResponse.getResponseText();
+
+                try {
+                    ObjectMapper objectMapper = new ObjectMapper();
+                    SensorStates sensorStates = objectMapper.readValue(jsonString, SensorStates.class);
+
+                    responseData.setVibrationCount(sensorStates.getVibrationData());
+                } catch (Exception e) {
+
+                }
+
+            }
+
+            @Override
+            public void onError() {
+
             }
         });
     }
