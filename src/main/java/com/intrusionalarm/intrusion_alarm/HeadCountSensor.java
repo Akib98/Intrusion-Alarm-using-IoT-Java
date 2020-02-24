@@ -45,7 +45,7 @@ public class HeadCountSensor extends ConcurrentCoapResource {
             exchange.respond(CoAP.ResponseCode.CONTENT,json.toString(), MediaTypeRegistry.APPLICATION_JSON);
         }
         catch (Exception e){
-
+            e.printStackTrace();
         }
     }
 

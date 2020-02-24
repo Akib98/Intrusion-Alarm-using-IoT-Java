@@ -36,7 +36,7 @@ public class IntrusionAlarmApplication {
 
                     responseData.setHeadCountInHome(sensorStates.getHeadCountInHome());
                 } catch (Exception e) {
-
+                    e.printStackTrace();
                 }
             }
 
@@ -62,6 +62,7 @@ public class IntrusionAlarmApplication {
 
                     responseData.setLaserSensor1data(sensorStates.isLaserSensor1data());
                 } catch (Exception e) {
+                    e.printStackTrace();
                 }
             }
 
@@ -86,6 +87,7 @@ public class IntrusionAlarmApplication {
 
                     responseData.setLaserSensor2data(sensorStates.isLaserSensor2data());
                 } catch (Exception e) {
+                    e.printStackTrace();
                 }
             }
 
@@ -110,6 +112,7 @@ public class IntrusionAlarmApplication {
 
                     responseData.setLaserSensor3data(sensorStates.isLaserSensor3data());
                 } catch (Exception e) {
+                    e.printStackTrace();
                 }
             }
 

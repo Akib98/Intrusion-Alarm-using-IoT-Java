@@ -53,6 +53,7 @@ public class LaserSensor3 extends ConcurrentCoapResource {
         }
         catch (Exception e)
         {
+            e.printStackTrace();
         }
     }
 }
