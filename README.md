@@ -1,2 +1,2 @@
-# IntrusionProject
+# Intrusion-Alarm-using-IoT-Java
 Internet of Things (IoT) is basically the concept of establishing communication between things of the real world through the internet, mainly devices that can sense the environment and do something in response. Similarly to the HTTP protocol, IoT uses the Constrained Application Protocol (CoAP) designed for machine-to-machine (m2m) applications. Here I have developed an intrusion alarm to detect any unusual entrance at home with five different sensors. Californium (Cf) framework is used for building the IoT application exclusively in java environment with the help of Spring Boot framework as a Maven Project
